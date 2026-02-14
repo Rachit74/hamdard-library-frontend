@@ -3,9 +3,12 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import FileComponent from '@/components/FileComponent.vue';
 
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "https://hamdardlibrary.onrender.com/api";
 
 const files = ref([]);
+const loading = ref(true)
+const error = ref(null)
+
 
 const props = defineProps(
     {
@@ -17,8 +20,10 @@ const getFiles = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/files/?department=${props.department}`);
         files.value = response.data
-    } catch (error) {
-        console.log(error)
+        loading.value = false;
+    } catch (err) {
+        error.value = err.response ?? { status: 'Network Error', data: { error: 'Could not reach server' } };;
+        loading.value = false;
     }
 }
 
@@ -29,8 +34,17 @@ onMounted(getFiles);
 <template>
     {{ props.department }} files
 
-
-    <div v-for="file in files" :key="file.id">
-        <FileComponent :file="file" />
+    <h3 v-if="loading">Loading...</h3>
+    <div v-else-if="error">
+        <h3>{{ error.data.error }}</h3>
+        <h4>{{ error.status }}</h4>
+    </div>
+    <div v-else>
+        <h3 v-if="files.length === 0">No files for this department yet...</h3>
+        <div v-else>
+            <div v-for="file in files" :key="file.id">
+                <FileComponent :file="file" />
+            </div>
+        </div>
     </div>
 </template>

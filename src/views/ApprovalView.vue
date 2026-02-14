@@ -11,7 +11,13 @@ const error = ref(null);
 
 const getUnapprovedFiles = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/files/unapproved/`);
+        // get jwt token from local storage
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${BASE_URL}/files/unapproved/`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         files.value = response.data;
         loading.value = false;
     } catch (err) {

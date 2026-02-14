@@ -2,8 +2,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import FileComponent from '@/components/FileComponent.vue';
-
-const BASE_URL = "https://hamdardlibrary.onrender.com/api";
+import api from '@/axios.js';
 
 const files = ref([]);
 const loading = ref(true)
@@ -18,7 +17,7 @@ const props = defineProps(
 
 const getFiles = async () => {
     try {
-        const response = await axios.get(`${BASE_URL}/files/?department=${props.department}`);
+        const response = await api.get(`/files/?department=${props.department}`);
         files.value = response.data
         loading.value = false;
     } catch (err) {

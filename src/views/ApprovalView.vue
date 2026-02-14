@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import api from '@/axios.js';
 import FileComponent from '@/components/FileComponent.vue';
 
 const BASE_URL = "https://hamdardlibrary.onrender.com/api";
@@ -13,7 +13,7 @@ const getUnapprovedFiles = async () => {
     try {
         // get jwt token from local storage
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${BASE_URL}/files/unapproved/`, {
+        const response = await api.get(`/files/unapproved/`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

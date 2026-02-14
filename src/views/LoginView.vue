@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-const BASE_URL = "https://hamdardlibrary.onrender.com/api";
+import api from '@/axios.js';
+
 
 const username = ref('');
 const password = ref('');
@@ -14,7 +15,7 @@ const loggedIn = ref(false);
 const loginUser = async () => {
     try {
         tryingLogin.value = true;
-        const response = await axios.post(`${BASE_URL}/auth/login/`, {
+        const response = await api.post(`/auth/login/`, {
             username: username.value,
             password: password.value
         });

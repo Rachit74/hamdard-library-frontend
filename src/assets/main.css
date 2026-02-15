@@ -1,0 +1,438 @@
+/* =====================================================
+   Hamdard Library — base.css
+   Theme: Modern Greenish
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ─── Tokens ──────────────────────────────────────── */
+:root {
+  --green-900: #0d2b1f;
+  --green-800: #164030;
+  --green-700: #1e5c43;
+  --green-600: #237a56;
+  --green-500: #2a9968;
+  --green-400: #3dbf82;
+  --green-300: #72d4a5;
+  --green-100: #e6f7ef;
+  --green-50:  #f2fbf6;
+
+  --surface:       #ffffff;
+  --surface-raised: #f7fdf9;
+  --surface-border: #d4ece0;
+
+  --text-primary:   #0d2b1f;
+  --text-secondary: #3d6b56;
+  --text-muted:     #7aaa92;
+
+  --accent:         var(--green-500);
+  --accent-hover:   var(--green-600);
+  --accent-subtle:  var(--green-100);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 1px 3px rgba(13, 43, 31, 0.07), 0 1px 2px rgba(13, 43, 31, 0.04);
+  --shadow-md: 0 4px 16px rgba(13, 43, 31, 0.10), 0 2px 6px rgba(13, 43, 31, 0.06);
+  --shadow-lg: 0 12px 40px rgba(13, 43, 31, 0.13);
+
+  --transition: 0.2s ease;
+
+  --font-body:    'DM Sans', sans-serif;
+  --font-display: 'Lora', Georgia, serif;
+}
+
+/* ─── Reset ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Base ────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--green-50);
+  color: var(--text-primary);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ─── Typography ──────────────────────────────────── */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--green-900);
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
+h4 { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+
+p  { color: var(--text-secondary); max-width: 65ch; }
+a  { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--accent-hover); }
+
+ul { list-style: none; }
+
+/* ─── Layout wrapper ──────────────────────────────── */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main, .view-content {
+  flex: 1;
+  padding: 2.5rem 1.5rem;
+  max-width: 1060px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── Navbar ──────────────────────────────────────── */
+nav {
+  background: var(--green-900);
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(13, 43, 31, 0.25);
+}
+
+nav ul.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 60px;
+}
+
+nav ul.nav-left li a {
+  color: rgba(255,255,255,0.72);
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+  letter-spacing: 0.01em;
+}
+
+nav ul.nav-left li a:hover,
+nav ul.nav-left li a.router-link-active {
+  color: #ffffff;
+  background: rgba(255,255,255,0.1);
+}
+
+nav ul.nav-left li.brand a {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-right: 1rem;
+  padding-left: 0;
+  letter-spacing: 0;
+  background: transparent;
+}
+
+nav ul.nav-left li.brand a:hover {
+  background: transparent;
+  color: var(--green-300);
+}
+
+/* ─── File Card ───────────────────────────────────── */
+.file-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+
+.file-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--green-300);
+}
+
+.file-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.file-header h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.semester {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--green-600);
+  background: var(--accent-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.file-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.department {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.download-btn {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1.5px solid var(--green-300);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.8rem;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.download-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ─── Departments list ────────────────────────────── */
+.departments-grid,
+template + ul,
+h3 + ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+/* Target the departments ul specifically */
+ul:has(> li > a[href*="/files/"]) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+ul:has(> li > a[href*="/files/"]) li a {
+  display: block;
+  text-align: center;
+  padding: 0.85rem 0.5rem;
+  background: var(--surface);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--green-700);
+  letter-spacing: 0.03em;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+
+ul:has(> li > a[href*="/files/"]) li a:hover {
+  background: var(--green-900);
+  color: #fff;
+  border-color: var(--green-900);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ─── Files view grid ─────────────────────────────── */
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+/* Fallback if no explicit class: wrap FileComponent divs */
+div:has(> div > .file-card) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+/* ─── Upload form ─────────────────────────────────── */
+form {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  max-width: 480px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="file"],
+select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: var(--green-400);
+  box-shadow: 0 0 0 3px rgba(42, 153, 104, 0.12);
+}
+
+input[type="file"] {
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+  color: var(--text-muted);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%233d6b56' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+/* ─── Buttons ─────────────────────────────────────── */
+button[type="submit"],
+.btn-primary {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  align-self: flex-start;
+  letter-spacing: 0.01em;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 14px rgba(42, 153, 104, 0.35);
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Status / feedback ───────────────────────────── */
+h3:has-text,
+h3[v-if] {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+
+/* Error block */
+div:has(> h3 + h4) {
+  background: #fff4f4;
+  border: 1.5px solid #fcc;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+div:has(> h3 + h4) h3 {
+  color: #b91c1c;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+}
+
+div:has(> h3 + h4) h4 {
+  color: #b91c1c;
+  opacity: 0.65;
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+}
+
+/* ─── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar       { width: 7px; }
+::-webkit-scrollbar-track { background: var(--green-50); }
+::-webkit-scrollbar-thumb { background: var(--green-300); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green-400); }
+
+/* ─── Selection ───────────────────────────────────── */
+::selection {
+  background: var(--green-300);
+  color: var(--green-900);
+}
+
+/* ─── Responsive ──────────────────────────────────── */
+@media (max-width: 600px) {
+  nav { padding: 0 1rem; }
+
+  nav ul.nav-left {
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  nav ul.nav-left li.brand a {
+    margin-right: 0.5rem;
+  }
+
+  form {
+    padding: 1.5rem 1.25rem;
+  }
+}

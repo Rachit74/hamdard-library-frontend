@@ -23,6 +23,18 @@ const getUnapprovedFiles = async () => {
     } catch (err) {
         error.value = err.response ?? { status: 'Network Error', data: { error: 'Could not reach server' } };
         loading.value = false;
+        console.log(error.value.data);
+    }
+}
+
+
+const approveFile = async (file) => {
+    try {
+        const response = await api.post(`/files/approve/${file.id}/`);
+        console.log('file approved');
+        getUnapprovedFiles();
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -33,10 +45,11 @@ onMounted(getUnapprovedFiles);
 <template>
     <div>
         <p v-if="loading">Loading files...</p>
-        <p v-else-if="error">{{ error.data.detail }}</p>
+        <p v-else-if="error">{{ error.data.detail }} | {{ error.status }}</p>
         <div v-else>
             <div v-for="file in files" :key="file.id">
                 <FileComponent :file="file" />
+                <button @click="approveFile(file)">Approve File</button>
             </div>
         </div>
     </div>

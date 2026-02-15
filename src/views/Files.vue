@@ -35,7 +35,7 @@ onMounted(getFiles);
 
     <h3 v-if="loading">Loading...</h3>
     <div v-else-if="error">
-        <h3>{{ error.data.error }}</h3>
+        <h3>{{ error.data.detail }}</h3>
         <h4>{{ error.status }}</h4>
     </div>
     <div v-else>

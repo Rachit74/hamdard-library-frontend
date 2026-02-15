@@ -29,16 +29,7 @@ onMounted(checkLogin);
             <li class="brand"><RouterLink to="/">Hamdard Library</RouterLink></li>
             <li><RouterLink to="/">Home</RouterLink></li>
             <li><RouterLink to="/departments">Departments</RouterLink></li>
-            <li><a href="">Upload</a></li>
-        </ul>
-        <ul class="nav-right">
-            <div v-if="!loggedIn">
-            <RouterLink to="/login">Login</RouterLink><br>
-            <RouterLink to="/register">Register</RouterLink>
-            </div>
-            <div v-else>
-                <button @click="logout">Logout</button>
-            </div>
+            <li><RouterLink to="/upload">Upload</RouterLink></li>
         </ul>
     </nav>
 </template>

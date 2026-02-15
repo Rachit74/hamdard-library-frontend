@@ -11,6 +11,7 @@ const routes = [
     { path: '/departments', component: Departments },
     { path: '/files/:department', component: Files, props: true},
     { path: '/login', component: LoginView},
+    { path: '/register', component: RegisterView},
     { path: '/approval', component: ApprovalView }
 ]
 

@@ -1,18 +1,26 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 
-let loggedIn = false;
+const loggedIn = ref(false);
 
 const checkLogin = ()=> {
     const token = localStorage.getItem('token');
+    console.log(token);
 
     if (token === null) {
-        loggedIn = true;
+        loggedIn.value = false;
     } else {
-        loggedIn = false;
+        loggedIn.value = true;
     }
 }
 
-checkLogin();
+const logout = () => {
+    localStorage.removeItem('token');
+    loggedIn.value = false;
+
+}
+
+onMounted(checkLogin);
 </script>
 
 <template>
@@ -24,12 +32,12 @@ checkLogin();
             <li><a href="">Upload</a></li>
         </ul>
         <ul class="nav-right">
-            <div v-if="loggedIn">
+            <div v-if="!loggedIn">
             <RouterLink to="/login">Login</RouterLink><br>
             <RouterLink to="/register">Register</RouterLink>
             </div>
             <div v-else>
-                Logout
+                <button @click="logout">Logout</button>
             </div>
         </ul>
     </nav>

@@ -17,8 +17,9 @@ const registerUser = async () => {
         })
         console.log(response.data);
     } catch (err) {
-        error.value = err;
+        error.value = err.response;
         console.log(error.value);
+        console.log(error.value.data)
     }
 }
 

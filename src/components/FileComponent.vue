@@ -5,6 +5,8 @@ defineProps({
         required: true,
     }
 })
+
+const cloudinaryBase = `https://res.cloudinary.com/dzciykc7t`
 </script>
 
 <template>
@@ -15,7 +17,7 @@ defineProps({
         </div>
         <div class="file-footer">
             <span class="department">{{ file.file_department }}</span>
-            <a :href="file.file_path" target="_blank" class="download-btn">
+            <a :href="`${cloudinaryBase}/${file.file_path}`" target="_blank" class="download-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />

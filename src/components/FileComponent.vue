@@ -17,7 +17,7 @@ const cloudinaryBase = `https://res.cloudinary.com/dzciykc7t`
         </div>
         <div class="file-footer">
             <span class="department">{{ file.file_department }}</span>
-            <a :href="`${cloudinaryBase}/${file.file_path}`" target="_blank" class="download-btn">
+            <a v-if="file.file_status" :href="`${cloudinaryBase}/${file.file_path}`" target="_blank" rel="noopener noreferrer" class="download-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -26,6 +26,7 @@ const cloudinaryBase = `https://res.cloudinary.com/dzciykc7t`
                 </svg>
                 Open
             </a>
+            <span v-else class="unapproved">⏳ Pending approval</span>
         </div>
     </div>
 </template>
@@ -121,5 +122,17 @@ const cloudinaryBase = `https://res.cloudinary.com/dzciykc7t`
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
+}
+
+.unapproved {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #92630a;
+    background: #fef9ec;
+    border: 1.5px solid #f5d87a;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
 }
 </style>

@@ -19,6 +19,7 @@
             <li><RouterLink to="/files/SNSAH">SNSAH</RouterLink></li>
             <li><RouterLink to="/files/SIST">SIST</RouterLink></li>
             <li><RouterLink to="/files/SHSS">SHSS</RouterLink></li>
+            <li><RouterLink to="/files/HIMSER">HIMSER</RouterLink></li>
         </ul>
     </div>
 </template>
